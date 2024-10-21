@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Mini</title>
+    <!-- Link to the favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add some basic styling */
+        .video-card {
+            width: 320px;
+            margin: 20px;
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .cover-image {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .video {
+            display: none;
+            width: 100%;
+        }
+
+        .video-card h3 {
+            margin: 10px 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Netflix Mini</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="video-list" id="video-list">
+            <h2>Movies</h2>
+            <div class="video-container">
+                <!-- Videos will be dynamically inserted here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            Contact NewMovieReqeust@gmail.com to request new movies. If archive.org is down, the website will not work.
+        </p>
+    </footer>
+
+    <script>
+        // Sample video data with covers
+        const videos = [
+            {
+                title: "Mean Girls",
+                description: "Mean Girls 2004",
+                url: "https://archive.org/download/mean.-girls.-2004.1080p.-br-rip.x-264.-yify_202410/Mean.Girls.2004.1080p.BrRip.x264.YIFY.mp4",
+                cover: "https://i.pinimg.com/736x/6a/a1/c0/6aa1c0a7fc46fda1ed6eb7463187bdcd.jpg"
+            },
+            {
+                title: "Mean Girls 2",
+                description: "The sequel movie of Mean Girls",
+                url: "https://archive.org/download/mean.-girls.-2.2011.1080p.-webrip.x-264.-aac-5.1-yts.-mx/Mean.Girls.2.2011.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4",
+                cover: "https://i.pinimg.com/736x/a3/cc/2f/a3cc2f25c4843312f757f14e9e1b99dc.jpg"
+            },
+            {
+                title: "Mean Girls The Musical",
+                description: "The threequel movie of Mean Girls",
+                url: "https://archive.org/download/mean.-girls.-2024.1080p.-webrip.x-264.-aac-5.1-yts.-mx/Mean.Girls.2024.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4",
+                cover: "https://i.pinimg.com/736x/f5/85/78/f58578fb4036d114ef86b95384a7663d.jpg"
+            }
+        ];
+
+        const videoList = document.getElementById('video-list').querySelector('.video-container');
+
+        videos.forEach(video => {
+            const videoDiv = document.createElement('div');
+            videoDiv.className = 'video-card';
+            videoDiv.innerHTML = `
+                <h3>${video.title}</h3>
+                <p>${video.description}</p>
+                <img class="cover-image" src="${video.cover}" alt="Cover image for ${video.title}">
+                <video class="video" controls src="${video.url}" width="320" height="240"></video>
+            `;
+            videoList.appendChild(videoDiv);
+
+            const coverImage = videoDiv.querySelector('.cover-image');
+            const videoElement = videoDiv.querySelector('.video');
+
+            // On clicking the cover, hide the image and show the video
+            coverImage.addEventListener('click', () => {
+                coverImage.style.display = 'none';
+                videoElement.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
